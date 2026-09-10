@@ -140,7 +140,7 @@ function NavItem({ item, collapsed }) {
   );
 }
 
-export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
+export default function Sidebar({ collapsed, mobileOpen, onMobileClose }) {
   return (
     <>
       {mobileOpen && (
@@ -188,5 +188,3 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
     </>
   );
 }
-
-export { navigation };

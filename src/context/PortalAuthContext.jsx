@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 import { pilgrims, getPilgrimById } from '../data/pilgrims';
 import { packages } from '../data/groups';
 
@@ -6,26 +6,21 @@ const STORAGE_KEY = 'hajjflow_portal_session';
 
 const PortalAuthContext = createContext(null);
 
-export function PortalAuthProvider({ children }) {
-  const [pilgrim, setPilgrim] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
+function loadSession() {
+  try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        const { pilgrimId, customPilgrim } = JSON.parse(stored);
-        if (customPilgrim) {
-          setPilgrim(customPilgrim);
-        } else if (pilgrimId) {
-          setPilgrim(getPilgrimById(pilgrimId) || null);
-        }
-      } catch {
-        localStorage.removeItem(STORAGE_KEY);
-      }
-    }
-    setLoading(false);
-  }, []);
+    if (!stored) return null;
+    const { pilgrimId, customPilgrim } = JSON.parse(stored);
+    if (customPilgrim) return customPilgrim;
+    if (pilgrimId) return getPilgrimById(pilgrimId) || null;
+  } catch {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+  return null;
+}
+
+export function PortalAuthProvider({ children }) {
+  const [pilgrim, setPilgrim] = useState(loadSession);
 
   const persist = (data) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -89,7 +84,7 @@ export function PortalAuthProvider({ children }) {
   }, []);
 
   return (
-    <PortalAuthContext.Provider value={{ pilgrim, loading, login, register, logout, isAuthenticated: !!pilgrim }}>
+    <PortalAuthContext.Provider value={{ pilgrim, loading: false, login, register, logout, isAuthenticated: !!pilgrim }}>
       {children}
     </PortalAuthContext.Provider>
   );

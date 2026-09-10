@@ -46,7 +46,6 @@ export default function AppLayout() {
     <div className="min-h-screen bg-slate-50">
       <Sidebar
         collapsed={collapsed}
-        onToggle={() => setCollapsed(!collapsed)}
         mobileOpen={mobileOpen}
         onMobileClose={() => setMobileOpen(false)}
       />

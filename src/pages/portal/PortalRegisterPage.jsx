@@ -34,10 +34,8 @@ export default function PortalRegisterPage() {
   const [form, setForm] = useState(emptyForm);
   const [errors, setErrors] = useState({});
 
-  // Always start fresh — clear any previous login/session so fields are not prefilled
   useEffect(() => {
     logout();
-    setForm(emptyForm);
   }, [logout]);
 
   const update = (field, value) => {
