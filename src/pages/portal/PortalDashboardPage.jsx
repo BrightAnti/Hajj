@@ -4,7 +4,7 @@ import Card, { CardHeader } from '../../components/Card';
 import StatusBadge from '../../components/StatusBadge';
 import { MiniProgressBar } from '../../components/Charts';
 import { usePortalAuth } from '../../context/PortalAuthContext';
-import { formatCurrency, formatDate } from '../../lib/utils';
+import { formatCurrency } from '../../lib/utils';
 
 const checklistItems = [
   { key: 'application', label: 'Application submitted', check: (p) => !!p.registeredDate },

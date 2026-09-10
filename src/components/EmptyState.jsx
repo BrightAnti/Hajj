@@ -1,7 +1,9 @@
 import { Inbox } from 'lucide-react';
 import Button from './Button';
 
-export default function EmptyState({ icon: Icon = Inbox, title, description, actionLabel, onAction }) {
+export default function EmptyState({ icon = Inbox, title, description, actionLabel, onAction }) {
+  const Icon = icon;
+
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4">
       <div className="p-4 rounded-full bg-slate-100 mb-4">

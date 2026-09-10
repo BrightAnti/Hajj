@@ -71,5 +71,3 @@ export default function StatusBadge({ status, type = 'generic', size = 'sm' }) {
     </span>
   );
 }
-
-export { paymentConfig, documentConfig, travelConfig, visaConfig, genericConfig };
